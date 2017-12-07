@@ -58,8 +58,10 @@ class Search extends Component {
                 results.map((e, i) => 
                     <Weather key={`cities-${i}`}
                         woeid={e}
-                        day={false}
-                        daynum={0}
+                        days={false}
+                        name={null}
+                        day={[]}
+                        fromAPI={true}
                         host={this.props.host}
                         />
                 )

@@ -18,26 +18,34 @@ class Weather extends Component {
         let woeid = this.props.woeid;
         let host = config.get('host');
 
-        axios.get(host + "?command=location&woeid=" + woeid, {})
-        .then(this.handleSuccess.bind(this))
-        .catch(this.handleError.bind(this));
+        if(this.props.fromAPI) {
+            axios.get(host + "?command=location&woeid=" + woeid, {})
+            .then(this.handleSuccess.bind(this))
+            .catch(this.handleError.bind(this));
+        } else {
+            this.bindWeather(this.props.name, this.props.day);
+        }
     }
 
     handleSuccess(response) {
-        this.setState({
-            name: response.data.title,
-            weather: response.data.consolidated_weather[this.props.daynum],
-            loading: false
-        });
-
-        let day = moment(response.data.consolidated_weather[this.props.daynum].applicable_date);
-        let stringday = day.format("dddd");
-
-        this.setState({day: stringday});
+        this.bindWeather(response.data.title, response.data.consolidated_weather[0]);
     }
 
     handleError(error) {
-        //alert(error.response.error.data);
+        alert(error.response.error.data);
+    }
+
+    bindWeather(name, desiredday) {
+        this.setState({
+            name: name,
+            weather: desiredday,
+            loading: false
+        });
+
+        let day = moment(desiredday.applicable_date);
+        let stringday = day.format("dddd");
+
+        this.setState({day: stringday});
     }
 
     formatTemp(temp) {

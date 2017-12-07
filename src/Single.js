@@ -10,6 +10,8 @@ class Single extends Component {
 
         this.state = {
             woeid: '',
+            name: '',
+            loading: true,
             days: []
         }
     }
@@ -29,11 +31,15 @@ class Single extends Component {
         let arr = response.data.consolidated_weather;
         let retarr = [];
 
-        arr.forEach(function(item, key) {
-            retarr.push(key);
+        arr.forEach(function(item) {
+            retarr.push(item);
         });
 
-        this.setState({days: retarr});
+        this.setState({
+            days: retarr,
+            name: response.data.title,
+            loading: false
+        });
     }
 
     handleError(error) {
@@ -45,11 +51,22 @@ class Single extends Component {
         return (
             <section className="row">
                 {
+                    this.state.loading
+                    &&
+                    <div style={{ height: '500px' }} className="col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+                        <img style={{width: "100%", margin: "0 auto"}} src={'http://i.giftrunk.com/44frgm.gif'} />
+                    </div>
+                }
+                {
+                    !this.state.loading
+                    &&
                     days.map((e, i) => 
                         <Weather key={`cities-${i}`}
                             woeid={this.state.woeid}
-                            day={true}
-                            daynum={e}
+                            days={true}
+                            name={this.state.name}
+                            day={e}
+                            fromAPI={false}
                             host={this.props.host}
                             />
                     )
