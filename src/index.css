@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.weather {
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+/* Menu */
+nav#mainNav {
+    background: #24292e;
+    padding: 15px;
+
+}
+
+.mainNav-heading {
+    font-size: 20px;
+    color: #fefefe;
+    font-weight: 300;
+    font-family: 'Lato', sans-serif;
+}
+
+.mainNav-heading:hover {
+    color: #fefefe!important;
+    opacity: 0.7;
+}
+
+.mainNav-heading blue {
+    color: #60b3ff;
+}
+
+.mainNav-links li a {
+    font-size: 14px;
+    color:#fefefe;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: 'Lato', sans-serif;
+}
+
+.mainNav-links li a:hover {
+    background: transparent!important;
+    opacity: 0.3;
+}
+
